@@ -10,4 +10,4 @@ Husky will run all jest tests before allowing a git push. If any tests fail, the
 
 ## GitHub Action Testing
 
-The GitHub Action will run all jest tests in the monorepo on every pull request. This is also highly configurable in `.github/workflows/test-coverage.yml`. If any tests fail, the action will fail and a report will be commented on the PR. The action is currently triggered on `pull_request` events to `main`
+The GitHub Action will run all jest tests in the monorepo on every pull request. This is also highly configurable in `.github/workflows/test-coverage.yml`. If any tests fail, the action will fail and a report will be commented on the PR. The action is currently triggered on `pull_request` events to `main`.
