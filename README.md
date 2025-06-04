@@ -7,6 +7,22 @@ This is a simple example of a monorepo containing multiple projects with jest te
 
 __NOTE:__ To keep this example simple, and what should be considered for all modern JS/TS monorepos, this repo is setup up as NPM workspaces to simplify dependency management. The primary reason for using workspaces in this context is to ensure your projects' dependencies are available when running tests globally. ___Warning:__ If you decide to not use workspaces in your monorepo, your implementation will differ slightly._
 
+### References
+- [Jest](https://jestjs.io/docs/getting-started)
+- [Husky](https://typicode.github.io/husky/)
+- [NPM Workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
+- [GitHub status checks](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-status-checks-to-pass-before-merging)
+
+## 🚨 REQUIRED 🚨
+
+If you want to actually prevent PR merges on failed test coverage, you need to manually create a ruleset in GitHub.
+1. goto https://github.com/andymitch/testify/settings/rules/new?target=branch&enforcement=disabled
+2. name your ruleset (ex. `pr-coverage`)
+3. set your target branch(es) (ex. `Include default branch`)
+4. select `Require status checks to pass` > `+ Add checks`
+5. start typing and select the name of your action's job (ex. `pr-coverage-check`)
+6. `Create`
+
 ## Jest Configuration
 
 Both Husky and the GitHub Action will run jest which is configured in `package.json`. You can still run jest manually either at the global level (all projects) or within the projects themselves as normal.
