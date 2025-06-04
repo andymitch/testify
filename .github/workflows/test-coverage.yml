@@ -6,7 +6,7 @@ on:
 jobs:
   coverage:
     env:
-      HUSKY: 0
+      HUSKY: 0 # Disable Husky to avoid pre-commit hooks
     permissions:
       contents: write
       checks: write
@@ -15,5 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          working-directory: "project-b"
+        # with:
+        #   working-directory: "project-b"
