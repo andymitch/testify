@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 /**
  * GET /foo
@@ -7,18 +7,18 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   const { name, age } = req.query;
-  
+
   // Validate parameters
   if (!name) {
     return res.status(400).json({ error: 'Name parameter is required' });
   }
-  
+
   // Convert age to number if provided
   const parsedAge = age ? parseInt(age, 10) : null;
   if (age && isNaN(parsedAge)) {
     return res.status(400).json({ error: 'Age must be a valid number' });
   }
-  
+
   // Response
   return res.json({
     message: `Hello, ${name}!`,
@@ -34,16 +34,16 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   const { email, preferences } = req.body;
-  
+
   // Validate parameters
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
   }
-  
+
   if (!preferences || typeof preferences !== 'object') {
     return res.status(400).json({ error: 'Preferences must be a valid object' });
   }
-  
+
   // Response
   return res.status(201).json({
     message: 'Data received successfully',
@@ -55,5 +55,4 @@ router.post('/', (req, res) => {
   });
 });
 
-module.exports = router;
-
+export default router;

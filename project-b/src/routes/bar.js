@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 // Mock database of items by category
 const mockItems = {
@@ -32,26 +32,26 @@ const mockItems = {
  */
 router.get('/', (req, res) => {
   const { category, limit } = req.query;
-  
+
   // Validate parameters
   if (!category) {
     return res.status(400).json({ error: 'Category parameter is required' });
   }
-  
+
   const categoryItems = mockItems[category];
   if (!categoryItems) {
-    return res.status(404).json({ 
+    return res.status(404).json({
       error: 'Category not found',
       availableCategories: Object.keys(mockItems)
     });
   }
-  
+
   // Parse limit
   const parsedLimit = limit ? parseInt(limit, 10) : categoryItems.length;
   if (limit && isNaN(parsedLimit)) {
     return res.status(400).json({ error: 'Limit must be a valid number' });
   }
-  
+
   // Response with items limited by the specified limit
   const limitedItems = categoryItems.slice(0, parsedLimit);
   return res.json({
@@ -68,24 +68,24 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   const { title, description, tags } = req.body;
-  
+
   // Validate parameters
   if (!title) {
     return res.status(400).json({ error: 'Title is required' });
   }
-  
+
   if (!description) {
     return res.status(400).json({ error: 'Description is required' });
   }
-  
+
   if (!tags || !Array.isArray(tags)) {
     return res.status(400).json({ error: 'Tags must be a valid array' });
   }
-  
+
   // Generate a mock ID and create a resource
   const id = Math.floor(Math.random() * 10000) + 1;
   const createdAt = new Date().toISOString();
-  
+
   // Response
   return res.status(201).json({
     id,
@@ -97,5 +97,4 @@ router.post('/', (req, res) => {
   });
 });
 
-module.exports = router;
-
+export default router;

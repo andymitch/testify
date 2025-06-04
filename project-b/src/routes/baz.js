@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 // Format functions for different output formats
 const formatters = {
@@ -23,20 +23,20 @@ const formatters = {
  */
 router.get('/', (req, res) => {
   const { id, format = 'json' } = req.query;
-  
+
   // Validate parameters
   if (!id) {
     return res.status(400).json({ error: 'ID parameter is required' });
   }
-  
+
   // Check if format is supported
   if (!formatters[format]) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: 'Unsupported format',
       supportedFormats: Object.keys(formatters)
     });
   }
-  
+
   // Generate mock data based on ID
   const data = {
     id,
@@ -44,10 +44,10 @@ router.get('/', (req, res) => {
     description: `This is resource ${id}`,
     createdAt: new Date().toISOString()
   };
-  
+
   // Format the response based on the requested format
   const formattedData = formatters[format](data);
-  
+
   // Set appropriate content type
   if (format === 'json') {
     res.json(formattedData);
@@ -69,12 +69,12 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   const { data, timestamp } = req.body;
-  
+
   // Validate parameters
   if (!data || typeof data !== 'object') {
     return res.status(400).json({ error: 'Data must be a valid object' });
   }
-  
+
   // Validate timestamp if provided
   let parsedTimestamp;
   if (timestamp) {
@@ -83,21 +83,21 @@ router.post('/', (req, res) => {
       return res.status(400).json({ error: 'Timestamp must be a valid date string' });
     }
   }
-  
+
   // Current server timestamp
   const serverTimestamp = new Date();
-  
+
   // Process data (mock processing)
   const processedData = {
     ...data,
     processed: true,
     requestTimestamp: timestamp ? parsedTimestamp.toISOString() : null,
     serverTimestamp: serverTimestamp.toISOString(),
-    processingTime: timestamp ? 
-      (serverTimestamp - parsedTimestamp) + 'ms' : 
+    processingTime: timestamp ?
+      (serverTimestamp - parsedTimestamp) + 'ms' :
       'No request timestamp provided'
   };
-  
+
   // Response
   return res.status(201).json({
     success: true,
@@ -106,5 +106,4 @@ router.post('/', (req, res) => {
   });
 });
 
-module.exports = router;
-
+export default router;
