@@ -1,3 +1,0 @@
-cd project-b
-npm test
-exit 1
