@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 // Format functions for different output formats
 const formatters = {
   json: (data) => data,
