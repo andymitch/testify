@@ -1,1 +1,2 @@
+cd project-a && npm test && cd ..
 cd project-b && npm test && cd ..
