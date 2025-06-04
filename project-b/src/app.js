@@ -1,14 +1,14 @@
-import express, { json, urlencoded } from 'express';
+const express = require('express');
 const app = express();
 
 // Middleware
-app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Import routes
-import fooRoutes from './routes/foo';
-import barRoutes from './routes/bar';
-import bazRoutes from './routes/baz';
+const fooRoutes = require('./routes/foo');
+const barRoutes = require('./routes/bar');
+const bazRoutes = require('./routes/baz');
 
 // Use routes
 app.use('/foo', fooRoutes);
@@ -20,4 +20,4 @@ app.get('/', (_, res) => {
   res.json({ message: 'Welcome to the API' });
 });
 
-export default app;
+module.exports = app;

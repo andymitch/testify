@@ -1,5 +1,5 @@
-import request from 'supertest';
-import app from '../../src/app';
+const request = require('supertest');
+const app = require('../../src/app');
 
 describe('GET /bar', () => {
   it('should return items when valid category is provided', async () => {

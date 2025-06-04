@@ -1,5 +1,5 @@
-import { Router } from 'express';
-const router = Router();
+const express = require('express');
+const router = express.Router();
 
 // Mock database of items by category
 const mockItems = {
@@ -97,4 +97,4 @@ router.post('/', (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

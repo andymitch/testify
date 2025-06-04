@@ -1,5 +1,5 @@
-import request from 'supertest';
-import app from '../../src/app';
+const request = require('supertest');
+const app = require('../../src/app');
 
 describe('GET /foo', () => {
   it('should return a greeting with name when valid name is provided', async () => {
