@@ -1,10 +1,10 @@
-const request = require('supertest');
-const app = require('../../src/app');
+import request from 'supertest';
+import app from '../../src/app';
 
 describe('GET /foo', () => {
   it('should return a greeting with name when valid name is provided', async () => {
     const res = await request(app).get('/foo').query({ name: 'John' });
-    
+
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('message', 'Hello, John!');
     expect(res.body).toHaveProperty('age', null);
@@ -14,7 +14,7 @@ describe('GET /foo', () => {
 
   it('should return a greeting with name and age when both are provided', async () => {
     const res = await request(app).get('/foo').query({ name: 'John', age: 30 });
-    
+
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('message', 'Hello, John!');
     expect(res.body).toHaveProperty('age', 30);
@@ -24,14 +24,14 @@ describe('GET /foo', () => {
 
   it('should return a 400 error when name is not provided', async () => {
     const res = await request(app).get('/foo');
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Name parameter is required');
   });
 
   it('should return a 400 error when age is not a valid number', async () => {
     const res = await request(app).get('/foo').query({ name: 'John', age: 'invalid' });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Age must be a valid number');
   });
@@ -45,7 +45,7 @@ describe('POST /foo', () => {
         email: 'john@example.com',
         preferences: { theme: 'dark', notifications: true }
       });
-    
+
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('message', 'Data received successfully');
     expect(res.body).toHaveProperty('user.email', 'john@example.com');
@@ -60,7 +60,7 @@ describe('POST /foo', () => {
       .send({
         preferences: { theme: 'dark', notifications: true }
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Email is required');
   });
@@ -71,7 +71,7 @@ describe('POST /foo', () => {
       .send({
         email: 'john@example.com'
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Preferences must be a valid object');
   });
@@ -83,9 +83,8 @@ describe('POST /foo', () => {
         email: 'john@example.com',
         preferences: 'invalid'
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Preferences must be a valid object');
   });
 });
-

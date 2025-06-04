@@ -1,10 +1,10 @@
-const request = require('supertest');
-const app = require('../../src/app');
+import request from 'supertest';
+import app from '../../src/app';
 
 describe('GET /bar', () => {
   it('should return items when valid category is provided', async () => {
     const res = await request(app).get('/bar').query({ category: 'electronics' });
-    
+
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('category', 'electronics');
     expect(res.body).toHaveProperty('totalItems');
@@ -15,7 +15,7 @@ describe('GET /bar', () => {
 
   it('should limit items when limit parameter is provided', async () => {
     const res = await request(app).get('/bar').query({ category: 'books', limit: 2 });
-    
+
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('category', 'books');
     expect(res.body).toHaveProperty('totalItems');
@@ -27,14 +27,14 @@ describe('GET /bar', () => {
 
   it('should return a 400 error when category is not provided', async () => {
     const res = await request(app).get('/bar');
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Category parameter is required');
   });
 
   it('should return a 404 error when category does not exist', async () => {
     const res = await request(app).get('/bar').query({ category: 'nonexistent' });
-    
+
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('error', 'Category not found');
     expect(res.body).toHaveProperty('availableCategories');
@@ -43,7 +43,7 @@ describe('GET /bar', () => {
 
   it('should return a 400 error when limit is not a valid number', async () => {
     const res = await request(app).get('/bar').query({ category: 'clothing', limit: 'invalid' });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Limit must be a valid number');
   });
@@ -58,7 +58,7 @@ describe('POST /bar', () => {
         description: 'This is a test resource',
         tags: ['test', 'resource', 'api']
       });
-    
+
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('id');
     expect(res.body).toHaveProperty('title', 'Test Resource');
@@ -77,7 +77,7 @@ describe('POST /bar', () => {
         description: 'This is a test resource',
         tags: ['test', 'resource', 'api']
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Title is required');
   });
@@ -89,7 +89,7 @@ describe('POST /bar', () => {
         title: 'Test Resource',
         tags: ['test', 'resource', 'api']
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Description is required');
   });
@@ -101,7 +101,7 @@ describe('POST /bar', () => {
         title: 'Test Resource',
         description: 'This is a test resource'
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Tags must be a valid array');
   });
@@ -114,9 +114,8 @@ describe('POST /bar', () => {
         description: 'This is a test resource',
         tags: 'invalid'
       });
-    
+
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error', 'Tags must be a valid array');
   });
 });
-
