@@ -1,13 +1,19 @@
-name: 'coverage'
+name: "coverage"
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
+    branches:
+      - main
 jobs:
-    coverage:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ArtiomTr/jest-coverage-report-action@v2
-              with:
-                working-directory: 'project-a'
+  coverage:
+    env:
+      HUSKY: 0
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: "project-b"
