@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - main
+    # paths:
+    #   - 'project-a/**'
+    #   - '!project-a/README.md'
+    #   # - '!project-a/<any-other-file-you-want-to-exclude>'
 jobs:
   coverage:
     env:
@@ -16,4 +20,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
         # with:
-        #   working-directory: "project-b"
+        #   working-directory: "project-a"
