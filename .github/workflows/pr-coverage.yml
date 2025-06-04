@@ -1,0 +1,19 @@
+name: "PR Coverage"
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
+      - dev
+
+jobs:
+  pr-coverage-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Jest coverage for changed files
+        run: npx jest --coverage --changedSince=origin/${{ github.base_ref }} --passWithNoTests --coverageDirectory=$RUNNER_TEMP/coverage

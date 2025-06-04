@@ -1,10 +1,18 @@
 {
-  "dependencies": {
+  "private": true,
+  "workspaces": [
+    "project-a",
+    "project-b"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "test": "jest",
+    "test:project-a": "npm run test --workspace=project-a",
+    "test:project-b": "npm run test --workspace=project-b"
+  },
+  "devDependencies": {
     "husky": "^9.1.7",
     "jest": "^29.7.0"
-  },
-  "scripts": {
-    "prepare": "husky"
   },
   "jest": {
     "testEnvironment": "node",
