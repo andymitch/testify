@@ -16,7 +16,7 @@ __NOTE:__ To keep this example simple, and what should be considered for all mod
 ## 🚨 REQUIRED 🚨
 
 If you want to actually prevent PR merges on failed test coverage, you need to manually create a ruleset in GitHub.
-1. goto https://github.com/andymitch/testify/settings/rules/new?target=branch&enforcement=disabled
+1. goto your respo's `Settings` > `Rules` > `Rulesets` > `New ruleset`
 2. name your ruleset (ex. `pr-coverage`)
 3. set your target branch(es) (ex. `Include default branch`)
 4. select `Require status checks to pass` > `+ Add checks`
