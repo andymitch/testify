@@ -6,15 +6,7 @@ const formatters = {
   json: (data) => data,
   text: (data) => JSON.stringify(data),
   html: (data) => `<pre>${JSON.stringify(data, null, 2)}</pre>`,
-  xml: (data) => {
-    // Simple XML conversion (for demonstration purposes)
-    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<response>\n';
-    Object.entries(data).forEach(([key, value]) => {
-      xml += `  <${key}>${value}</${key}>\n`;
-    });
-    xml += '</response>';
-    return xml;
-  }
+  xml: (data) => Object.entries(data).reduce((acc, [key, value]) => acc + `<${key}>${value}</${key}>\n`, '<?xml version="1.0" encoding="UTF-8"?>\n<response>\n') + '</response>'
 };
 
 /**

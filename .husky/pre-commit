@@ -1,1 +1,1 @@
-npx jest --coverage --onlyChanged --passWithNoTests --coverageDirectory=/tmp/coverage
+npm run test:changes
